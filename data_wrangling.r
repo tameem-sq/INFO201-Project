@@ -15,8 +15,6 @@ columns_to_keep <- c("Zip_Code", "Mean", "Median", "FinalMathAveScore", "FinalAl
 
 combined_df <- select(df_clean, columns_to_keep)
 
-combined_df$Median <- as.numeric(combined_df$Median)
-
 combined_df <- combined_df %>%
   mutate(Income_Level = cut(Median, breaks = c(-Inf, 35000, 75000, Inf), labels = c("Low", "Medium", "High")))
 
@@ -32,5 +30,5 @@ avg_mean_income <- combined_df %>%
 
 combined_df['difference_from_avg_mean'] = avg_mean_income - combined_df['Mean']
 
-summary_columns <- c("Zip_Code", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
+summary_columns <- c("Zip_Code", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore")
 summary_df <- select(combined_df, summary_columns)
