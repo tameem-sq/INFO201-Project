@@ -1,7 +1,8 @@
+#INFO201 Group Project
 library("dplyr")
 
-income_df <- read.csv("kaggle_income.csv")
-college_df <- read.csv("mich_college_readiness.csv")
+income_df <- read.csv("datasets/kaggle_US_income_by zipcode.csv")
+college_df <- read.csv("datasets/michigan_college_readiness_SAT_scores_2017_2018.csv")
 
 
 income_mich_df <- income_df %>%
@@ -15,6 +16,8 @@ columns_to_keep <- c("Zip_Code", "Mean", "Median", "FinalMathAveScore", "FinalAl
 
 combined_df <- select(df_clean, columns_to_keep)
 
+# Convert data type of Median to numeric and add new categorical variable Income_Level with values Low, Medium, and High
+combined_df$Median <- as.numeric(combined_df$Median)
 combined_df <- combined_df %>%
   mutate(Income_Level = cut(Median, breaks = c(-Inf, 35000, 75000, Inf), labels = c("Low", "Medium", "High")))
 
