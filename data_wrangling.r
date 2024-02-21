@@ -11,9 +11,14 @@ combined_income_college <- left_join(income_mich_df, college_df, by=c("Zip_Code"
 
 df_clean <- na.omit(combined_income_college)
 
-columns_to_keep <- c("County", "City", "Zip_Code", "Area_Code", "Mean", "Median", "Stdev", "sum_w", "MathNumAssessed", "MathNumReady", "AllSbjtNumReady", "AllSbjtNumAssessed", "EBRWNumAssessed", "EBRWNumReady", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
+columns_to_keep <- c("Zip_Code", "Mean", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
 
 combined_df <- select(df_clean, columns_to_keep)
+
+combined_df$Median <- as.numeric(combined_df$Median)
+
+combined_df <- combined_df %>%
+  mutate(Income_Level = cut(Median, breaks = c(-Inf, 35000, 75000, Inf), labels = c("Low", "Medium", "High")))
 
 avg_median_income <- combined_df %>%
   summarize(median_income_avg = mean(Median, na.rm = TRUE)) %>%
@@ -27,7 +32,5 @@ avg_mean_income <- combined_df %>%
 
 combined_df['difference_from_avg_mean'] = avg_mean_income - combined_df['Mean']
 
-summary_columns <- c("County", "City", "Zip_Code", "Mean", "Median")
+summary_columns <- c("Zip_Code", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
 summary_df <- select(combined_df, summary_columns)
-
-
