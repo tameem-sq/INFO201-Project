@@ -14,24 +14,24 @@ df_clean <- na.omit(combined_income_college)
 
 columns_to_keep <- c("Zip_Code", "Mean", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
 
-combined_df <- select(df_clean, columns_to_keep)
+unified_df <- select(df_clean, columns_to_keep)
 
 # Convert data type of Median to numeric and add new categorical variable Income_Level with values Low, Medium, and High
-combined_df$Median <- as.numeric(combined_df$Median)
-combined_df <- combined_df %>%
+unified_df$Median <- as.numeric(unified_df$Median)
+unified_df <- unified_df %>%
   mutate(Income_Level = cut(Median, breaks = c(-Inf, 35000, 75000, Inf), labels = c("Low", "Medium", "High")))
 
-avg_median_income <- combined_df %>%
+avg_median_income <- unified_df %>%
   summarize(median_income_avg = mean(Median, na.rm = TRUE)) %>%
   pull(median_income_avg)
 
-combined_df['difference_from_avg_median'] = avg_median_income - combined_df['Median']
+unified_df['difference_from_avg_median'] = avg_median_income - unified_df['Median']
 
-avg_mean_income <- combined_df %>%
+avg_mean_income <- unified_df %>%
   summarize(mean_income_avg = mean(Mean, na.rm = TRUE)) %>%
   pull(mean_income_avg)
 
-combined_df['difference_from_avg_mean'] = avg_mean_income - combined_df['Mean']
+unified_df['difference_from_avg_mean'] = avg_mean_income - unified_df['Mean']
 
 summary_columns <- c("Zip_Code", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore")
-summary_df <- select(combined_df, summary_columns)
+summary_df <- select(unified_df, summary_columns)
