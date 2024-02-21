@@ -19,8 +19,13 @@ avg_median_income <- combined_df %>%
   summarize(median_income_avg = mean(Median, na.rm = TRUE)) %>%
   pull(median_income_avg)
 
-
 combined_df['difference_from_avg_median'] = avg_median_income - combined_df['Median']
+
+avg_mean_income <- combined_df %>%
+  summarize(mean_income_avg = mean(Mean, na.rm = TRUE)) %>%
+  pull(mean_income_avg)
+
+combined_df['difference_from_avg_mean'] = avg_mean_income - combined_df['Mean']
 
 summary_columns <- c("County", "City", "Zip_Code", "Mean", "Median")
 summary_df <- select(combined_df, summary_columns)
