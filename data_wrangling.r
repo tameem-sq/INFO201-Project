@@ -4,7 +4,6 @@ library("dplyr")
 income_df <- read.csv("datasets/kaggle_US_income_by zipcode.csv")
 college_df <- read.csv("datasets/michigan_college_readiness_SAT_scores_2017_2018.csv")
 
-
 income_mich_df <- income_df %>%
   filter(State_Name == "Michigan")
 
