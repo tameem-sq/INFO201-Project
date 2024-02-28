@@ -1,7 +1,8 @@
 #INFO201 Group Project
 library("dplyr")
+library("ggplot2")
 
-income_df <- read.csv("datasets/kaggle_US_income_by zipcode.csv")
+income_df <- read.csv("datasets/kaggle_US_income_by_zipcode.csv")
 college_df <- read.csv("datasets/michigan_college_readiness_SAT_scores_2017_2018.csv")
 
 income_mich_df <- income_df %>%
@@ -13,7 +14,7 @@ df_clean <- na.omit(combined_income_college)
 
 columns_to_keep <- c("Zip_Code", "Mean", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
 
-unified_df <- select(df_clean, columns_to_keep)
+unified_df <- select(df_clean, all_of(columns_to_keep))
 
 # Convert data type of Median to numeric and add new categorical variable Income_Level with values Low, Medium, and High
 unified_df$Median <- as.numeric(unified_df$Median)
@@ -33,4 +34,13 @@ avg_mean_income <- unified_df %>%
 unified_df['difference_from_avg_mean'] = avg_mean_income - unified_df['Mean']
 
 summary_columns <- c("Zip_Code", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore")
-summary_df <- select(unified_df, summary_columns)
+summary_df <- select(unified_df, all_of(summary_columns))
+
+median_income_final_all_subject_score <- ggplot(data = unified_df) +
+  geom_point(
+    mapping = aes(
+      x = Median,
+      y = FinalAllSbjtAveScore)
+  ) + scale_x_continuous(labels = scales::comma, limits = c(0, 200000))  # Adjust the limits as needed
+
+median_income_final_all_subject_score
