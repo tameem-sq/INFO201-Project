@@ -2,8 +2,8 @@
 library("dplyr")
 library("ggplot2")
 
-income_df <- read.csv("datasets/kaggle_US_income_by_zipcode.csv")
-college_df <- read.csv("datasets/michigan_college_readiness_SAT_scores_2017_2018.csv")
+income_df <- read.csv("kaggle_US_income_by_zipcode.csv")
+college_df <- read.csv("michigan_college_readiness_SAT_scores_2017_2018.csv")
 
 income_mich_df <- income_df %>%
   filter(State_Name == "Michigan")
@@ -12,7 +12,7 @@ combined_income_college <- left_join(income_mich_df, college_df, by=c("Zip_Code"
 
 df_clean <- na.omit(combined_income_college)
 
-columns_to_keep <- c("Zip_Code", "Mean", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
+columns_to_keep <- c("County", "City", "Zip_Code", "AllSbjtNumReady", "AllSbjtNumAssessed", "Mean", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
 
 unified_df <- select(df_clean, all_of(columns_to_keep))
 
@@ -44,3 +44,4 @@ median_income_final_all_subject_score <- ggplot(data = unified_df) +
   ) + scale_x_continuous(labels = scales::comma, limits = c(0, 200000))  # Adjust the limits as needed
 
 median_income_final_all_subject_score
+

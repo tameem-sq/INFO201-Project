@@ -8,7 +8,7 @@ library(bslib)
 ## OVERVIEW TAB INFO
 
 overview_tab <- tabPanel("Overview Tab Title",
-   h1("Income Level Relative to College Readiness in Michigan"),
+   h1("Some title"),
    p("some explanation")
 )
 
@@ -84,14 +84,19 @@ viz_3_tab <- tabPanel("Viz 3 tab title",
 
 ## CONCLUSIONS TAB INFO
 
-conclusion_tab <- tabPanel("Takeaways & Insights",
- h1("Some title"),
- p("some conclusions")
+conclusion_tab <- tabPanel("Insights & Takeaways",
+ h1("Correlations?"),
+ p("From our analysis on college readiness comparing statistics from the SAT scores and income levels in different regions in Michigan State, we can see that...")
 )
 
+my_theme <- bs_theme(bg = "#0b3d91",
+                     fg = "white",
+                     primary = "#FCC780")
 
 
-ui <- navbarPage("College Readiness & Income Level in Michigan State",
+ui <- navbarPage(
+  theme = my_theme,
+  "Household Income Levels vs College Readiness in Michigan State",
   overview_tab,
   viz_1_tab,
   viz_2_tab,
