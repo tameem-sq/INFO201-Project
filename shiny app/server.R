@@ -7,7 +7,7 @@ server <- function(input, output){
       geom_point(
         mapping = aes(
           x = Median,
-          y = FinalAllSbjtAveScore)
+          y = !!as.name(input$viz_1_y_axis))
       ) +
       labs(title = input$viz_1_title)
     return(ggplotly(Median_vs_SbjtScore))
