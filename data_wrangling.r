@@ -12,7 +12,7 @@ combined_income_college <- left_join(income_mich_df, college_df, by=c("Zip_Code"
 
 df_clean <- na.omit(combined_income_college)
 
-columns_to_keep <- c("County", "City", "Zip_Code", "AllSbjtNumReady", "AllSbjtNumAssessed", "Mean", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
+columns_to_keep <- c("State_Name", "County", "City", "Zip_Code", "AllSbjtNumReady", "AllSbjtNumAssessed", "Mean", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
 
 unified_df <- select(df_clean, all_of(columns_to_keep))
 

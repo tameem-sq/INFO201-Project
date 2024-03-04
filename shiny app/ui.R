@@ -72,7 +72,10 @@ viz_3_sidebar <- sidebarPanel(
 
 viz_3_main_panel <- mainPanel(
   h2("Vizualization 3 Title"),
-  # plotlyOutput(outputId = "your_viz_1_output_id")
+  textInput(inputId = "graph_title",
+            label = "Title of graph:"),
+  #put graph here
+  plotlyOutput(outputId = "choropleth_graph")
 )
 
 viz_3_tab <- tabPanel("Viz 3 tab title",
@@ -88,8 +91,6 @@ conclusion_tab <- tabPanel("Takeaways & Insights",
  h1("Some title"),
  p("some conclusions")
 )
-
-
 
 ui <- navbarPage("College Readiness & Income Level in Michigan State",
   overview_tab,
