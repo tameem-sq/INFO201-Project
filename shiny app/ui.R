@@ -7,9 +7,12 @@ library(bslib)
 
 ## OVERVIEW TAB INFO
 
-overview_tab <- tabPanel("Overview Tab Title",
+overview_tab <- tabPanel("Home Page",
    h1("Income Level Relative to College Readiness in Michigan"),
-   p("some explanation")
+   p("Using median family incomes based on ZIP Codes, and measuring college readiness through total SAT scores, our dataset explores if there is a relationship between family incomes and SAT scores among high school students in Michigan. We are seeking to answer if there is a correlation between median family incomes and college readiness in Michigan, using individual income statistics (https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2020-zip-code-data-soi) and a dataset on college readiness in 2017-2018 in Michigan (https://catalog.data.gov/dataset/collegereadiness-2017-2018-byzip-20181107-501d2). 
+
+The income data came from the IRS, yet some median family incomes are at 0, which may be inaccurate or missing data. While we measure college readiness on SAT scores, we do not measure the students that do not take the SAT tests, which may be misleading on measuring college readiness on students in Michigan. 
+")
 )
 
 ## VIZ 1 TAB INFO
@@ -52,11 +55,11 @@ viz_2_sidebar <- sidebarPanel(
 )
 
 viz_2_main_panel <- mainPanel(
-  h2("Vizualization 2 Title"),
-  # plotlyOutput(outputId = "your_viz_1_output_id")
+  h2("Correlation between Math and Verbal Scores with Median Income"),
+  plotlyOutput(outputId = "Scores_vs_Median")
 )
 
-viz_2_tab <- tabPanel("Viz 2 tab title",
+viz_2_tab <- tabPanel("Score Correlation with Income",
   sidebarLayout(
     viz_2_sidebar,
     viz_2_main_panel

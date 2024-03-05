@@ -40,4 +40,17 @@ server <- function(input, output){
       labs(title = "Choropleth Map of Median Income Michigan")
     return(ggplotly(my_plot))
   })
+  
+  output$Scores_vs_Median <- renderPlotly({
+  Scores_vs_Median <- ggplot(unified_df) +
+    geom_point(
+      mapping = aes(
+      x = FinalMathAveScore,
+      y = FinalEWBRWAveScore, 
+      color = Median)) +
+    scale_color_gradient(low = "blue", high = "red", name = "Median Income") +
+    labs(title = "Correlation between Math and Verbal Scores with Median Income")
+  return(ggplotly(Scores_vs_Median))
+  })
+  
 }
