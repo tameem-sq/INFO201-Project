@@ -55,7 +55,7 @@ viz_1_tab <- tabPanel("Median vs SAT Scores",
 ## VIZ 2 TAB INFO
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
-  sliderInput("size", "Point Size:", min = 1, max = 10, value = 5),
+  sliderInput("size", "Point Size:", min = 1, max = 6, value = 3),
   numericInput("low_income", "Low Income Threshold:", value = 30000),
   numericInput("high_income", "High Income Threshold:", value = 80000)
 )
