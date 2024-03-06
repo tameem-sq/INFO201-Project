@@ -36,14 +36,4 @@ unified_df['difference_from_avg_mean'] = avg_mean_income - unified_df['Mean']
 summary_columns <- c("Zip_Code", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore")
 summary_df <- select(unified_df, all_of(summary_columns))
 
-median_income_final_all_subject_score <- ggplot(data = unified_df) +
-  geom_point(
-    mapping = aes(
-      x = Median,
-      y = FinalAllSbjtAveScore)
-  ) + scale_x_continuous(labels = scales::comma, limits = c(0, 200000))  # Adjust the limits as needed
-
-median_income_final_all_subject_score
-
-
 write.csv(unified_df, "~/Documents/GitHub/INFO201-Project/shiny app/unified_df.csv") 
