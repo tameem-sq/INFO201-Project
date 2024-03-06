@@ -55,9 +55,9 @@ viz_1_tab <- tabPanel("Median vs SAT Scores",
 ## VIZ 2 TAB INFO
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
-  textInput(inputId = "graph_title",
-            label = "Come up with a more creative title for the scatterplot and put it here!")
-  #TODO: Put inputs for modifying graph here
+  sliderInput("size", "Point Size:", min = 1, max = 10, value = 5),
+  numericInput("low_income", "Low Income Threshold:", value = 30000),
+  numericInput("high_income", "High Income Threshold:", value = 80000)
 )
 
 viz_2_main_panel <- mainPanel(

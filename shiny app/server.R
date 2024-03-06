@@ -103,6 +103,19 @@ server <- function(input, output){
     labs(title = input$graph_title)
     # labs(title = "Correlation between Math and Verbal Scores with Median Income")
   return(ggplotly(Scores_vs_Median))
+
+output$Scores_vs_Median <- renderPlotly({
+    filtered_df <- unified_df %>%
+      filter(Median >= input$low_income & Median <= input$high_income)
+    
+    Scores_vs_Median <- ggplot(filtered_df) + 
+      geom_point(mapping = aes(x = FinalMathAveScore, y = FinalEWBRWAveScore, color = Median), size = input$size) + 
+      scale_color_viridis_c(name = "Median Income") +
+      labs(title = "Correlation between Math and Verbal Scores with Median Income") 
+    
+    ggplotly(Scores_vs_Median)
   })
+
+  
   
 }
