@@ -21,7 +21,10 @@ df_colnames = colnames(unified_df)
 df_colnames = c(
   "Average All Subjects Score" = "FinalAllSbjtAveScore",
   "Average Math Score" = "FinalMathAveScore",
-  "Average Reading/Writing Score" = "FinalEWBRWAveScore"
+  "Average Reading/Writing Score" = "FinalEWBRWAveScore",
+  "Percentage of Students who scored above College Readiness Proficiency in Math" = "AllSbjtPctReady",
+  "Percentage of Students who scored above College Readiness Proficiency in Math" = "MathPctReady",
+  "Percentage of Students who scored above College Readiness Proficiency in Math" = "EBRWPctReady"
 )
 
 viz_1_sidebar <- sidebarPanel(

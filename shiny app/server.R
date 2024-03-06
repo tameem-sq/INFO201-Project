@@ -25,6 +25,7 @@ server <- function(input, output){
       labs(title = input$viz_1_title)
     return(ggplotly(Median_vs_SbjtScore))
   })
+  
   output$choropleth_graph <- renderPlotly({
     merged_data <- merge(michigan_shape, unified_df, by.x = "region", by.y = "State_Name", all.x = TRUE)
     
