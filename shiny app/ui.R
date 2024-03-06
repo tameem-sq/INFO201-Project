@@ -93,12 +93,22 @@ viz_3_tab <- tabPanel("Viz 3 tab title",
 
 ## CONCLUSIONS TAB INFO
 
-conclusion_tab <- tabPanel("Takeaways & Insights",
- h1("Some title"),
- p("some conclusions")
+conclusion_tab <- tabPanel("Drawing Conclusions",
+ h1("Takeaways & Insights"),
+ p("The dataset offers information on a variety of insight, including SAT scores, median income, and zip codes from diverse places. There is no doubt that analyzing this data reveals some intriguing correlations and trends."),
+ p("When the association between Median Income and Total SAT Scores is examined, a slight positive correlation is found, indicating that locations with higher Median Incomes also have higher Total SAT Scores. This shows that socioeconomic status may influence academic performance and vice versa. Similarly, both English and Math SAT scores have a positive relationship with Median Income with some outliers, showing that greater economic affluence leads to improved performance in these disciplines."),
+ p("The dataset demonstrates economic diversity across distinct geographical areas in terms of median income distribution among Zip Codes. While the graph does not directly indicate the direct association between Median Income and Zip Code, the data does highlight income inequalities between regions represented by zip codes."),
+ p("To recapitulate, the information sheds light on how socioeconomic characteristics such as median income influence academic performance, particularly on standardized tests such as the SAT. It also provides light on the economic diversity that exists across different zip codes, stressing the necessity of addressing socioeconomic aspects when examining educational outcomes.")
 )
 
+my_theme <- bs_theme(bg = "#0b3d91",
+                     fg = "white",
+                     primary = "#FCC780")
+my_theme <- bs_theme_update(my_theme,
+                            bootswatch = "sketchy")
+
 ui <- navbarPage("College Readiness & Income Level in Michigan State",
+  theme = my_theme,
   overview_tab,
   viz_1_tab,
   viz_2_tab,
