@@ -103,6 +103,7 @@ server <- function(input, output){
     labs(title = input$graph_title)
     # labs(title = "Correlation between Math and Verbal Scores with Median Income")
   return(ggplotly(Scores_vs_Median))
+         })
 
 output$Scores_vs_Median <- renderPlotly({
     filtered_df <- unified_df %>%
@@ -115,7 +116,4 @@ output$Scores_vs_Median <- renderPlotly({
     
     ggplotly(Scores_vs_Median)
   })
-
-  
-  
 }
