@@ -1,6 +1,8 @@
+library("shiny")
 library("dplyr")
 library("ggplot2")
 library("plotly")
+
 
 # Install these:
 # install.packages("maps")
@@ -19,9 +21,12 @@ combined_income_college <- left_join(income_mich_df, college_df, by=c("Zip_Code"
 
 df_clean <- na.omit(combined_income_college)
 
-columns_to_keep <- c("State_Name", "County", "City", "Zip_Code", "AllSbjtNumReady", "AllSbjtNumAssessed", "Lat", "Lon", "Mean_Income" = "Mean", "Median_Income" = "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "TotalPerReady" = "AllSbjtPctReady", "EBRWPctReady")
+columns_to_keep <- c("State_Name", "County", "City", "Zip_Code", "AllSbjtNumReady", "TotalNumberAssessed" = "AllSbjtNumAssessed", "Lat", "Lon", "MeanIncome" = "Mean", "MedianIncome" = "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "TotalPerReady" = "AllSbjtPctReady", "EBRWPctReady")
 
 unified_df <- select(df_clean, all_of(columns_to_keep))
+
+# write.csv("~/Documents/GitHub/INFO201-Project/shiny app/unified_df.csv")
+# unified_df <- read.csv("~/Documents/GitHub/INFO201-Project/shiny app/unified_df.csv")
 
 # Convert data type of Median to numeric and add new categorical variable Income_Level with values Low, Medium, and High
 unified_df$Median <- as.numeric(unified_df$Median)
@@ -47,27 +52,46 @@ server <- function(input, output){
   
   output$choropleth_graph <- renderPlotly({
     merged_data <- merge(michigan_shape, unified_df, by.x = "region", by.y = "State_Name", all.x = TRUE)
-    
     # create ggplot and use
-    my_plot <- ggplot(data = michigan_shape) +
-      geom_polygon(aes(
-        x = long,
-        y = lat,
-        group = group,
-        State = "Michigan"
-      )) +
-      geom_point(data = unified_df, aes(
-        x = Lon,
-        y = Lat,
-        Zip_Code = Zip_Code,
-        Income = Median,
-        Ready = TotalPerReady)
-      ) +
-      coord_map() + 
-      labs(title = input$graph_title)
+    if (input$show_points) {
+      my_plot <- ggplot(data = michigan_shape) +
+        geom_polygon(aes(
+          x = long,
+          y = lat,
+          group = group,
+          State = "Michigan"
+        ),
+        fill = "white",
+        color = "purple"
+        ) +
+        geom_point(data = unified_df, aes_string(
+          x = "Lon",
+          y = "Lat",
+          fill = "MedianIncome",
+          size = "TotalPerReady",
+          color = "TotalNumberAssessed")
+        ) +
+        coord_map() + 
+        labs(title = "Map of Michigan")
+    }
+    else {
+      my_plot <- ggplot(data = michigan_shape) +
+        geom_polygon(aes(
+          x = long,
+          y = lat,
+          group = group,
+          State = "Michigan"
+        ),
+        fill = "white",
+        color = "purple"
+        ) +
+        coord_map() + 
+        labs(title = "Map of Michigan")
+    }
+  
     return(ggplotly(my_plot))
   })
-  
+    
   output$Scores_vs_Median <- renderPlotly({
   Scores_vs_Median <- ggplot(unified_df) +
     geom_point(
@@ -76,7 +100,8 @@ server <- function(input, output){
       y = FinalEWBRWAveScore, 
       color = Median)) +
     scale_color_gradient(low = "blue", high = "red", name = "Median Income") +
-    labs(title = "Correlation between Math and Verbal Scores with Median Income")
+    labs(title = input$graph_title)
+    # labs(title = "Correlation between Math and Verbal Scores with Median Income")
   return(ggplotly(Scores_vs_Median))
   })
   

@@ -55,6 +55,8 @@ viz_1_tab <- tabPanel("Median vs SAT Scores",
 ## VIZ 2 TAB INFO
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
+  textInput(inputId = "graph_title",
+            label = "Come up with a more creative title for the scatterplot and put it here!")
   #TODO: Put inputs for modifying graph here
 )
 
@@ -63,7 +65,7 @@ viz_2_main_panel <- mainPanel(
   plotlyOutput(outputId = "Scores_vs_Median")
 )
 
-viz_2_tab <- tabPanel("Score Correlation with Income",
+viz_2_tab <- tabPanel("SAT Score Correlation with Income",
   sidebarLayout(
     viz_2_sidebar,
     viz_2_main_panel
@@ -72,14 +74,17 @@ viz_2_tab <- tabPanel("Score Correlation with Income",
 
 ## VIZ 3 TAB INFO
 viz_3_sidebar <- sidebarPanel(
-  h2("Options for graph"),
-  #TODO: Put inputs for modifying graph here
+  h2("Explanation and Options for Graph"),
+  p("Points located at Latitude & Longitude for Zipcodes"), 
+  p("Size of point is determined by Total Percent of Students Ready"),
+  p("Color intenisty of outline of point is determined by Total Number of Students Assessed."),
+  p("Color intenisty of point is determined by Median Income."),
+  checkboxInput("show_points", "Show Points", TRUE)
 )
 
 viz_3_main_panel <- mainPanel(
-  h2("Vizualization 3 Title"),
-  textInput(inputId = "graph_title",
-            label = "Title of graph:"),
+  h2("Interactive Map of Michigan State"),
+  labs(title = "Show Points: Michigan Zip Codes"),
   #put graph here
   plotlyOutput(outputId = "choropleth_graph")
 )
