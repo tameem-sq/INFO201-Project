@@ -34,8 +34,15 @@ server <- function(input, output){
         x = long,
         y = lat,
         group = group,
-        fill = "Median"
+        State = "Michigan"
       )) +
+      geom_point(data = unified_df, aes(
+        x = Lon,
+        y = Lat,
+        Zip_Code = Zip_Code,
+        Income = Median,
+        Ready = TotalPerReady)
+      ) +
       coord_map() + 
       labs(title = input$graph_title)
     return(ggplotly(my_plot))

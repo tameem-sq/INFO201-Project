@@ -12,7 +12,7 @@ combined_income_college <- left_join(income_mich_df, college_df, by=c("Zip_Code"
 
 df_clean <- na.omit(combined_income_college)
 
-columns_to_keep <- c("State_Name", "County", "City", "Zip_Code", "AllSbjtNumReady", "AllSbjtNumAssessed", "Mean", "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
+columns_to_keep <- c("State_Name", "County", "City", "Zip_Code", "AllSbjtNumReady", "AllSbjtNumAssessed", "Lat", "Lon", "Mean_Income" = "Mean", "Median_Income" = "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "TotalPerReady" = "AllSbjtPctReady", "EBRWPctReady")
 
 unified_df <- select(df_clean, all_of(columns_to_keep))
 
@@ -45,3 +45,5 @@ median_income_final_all_subject_score <- ggplot(data = unified_df) +
 
 median_income_final_all_subject_score
 
+
+write.csv(unified_df, "~/Documents/GitHub/INFO201-Project/shiny app/unified_df.csv") 

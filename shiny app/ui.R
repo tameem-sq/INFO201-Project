@@ -5,6 +5,9 @@ library(plotly)
 #library for color
 library(bslib)
 
+# import df
+unified_df <- read.csv("unified_df.csv")
+
 ## OVERVIEW TAB INFO
 
 overview_tab <- tabPanel("Home Page",
@@ -16,12 +19,12 @@ The income data came from the IRS, yet some median family incomes are at 0, whic
 )
 
 ## VIZ 1 TAB INFO
-
 df_colnames = colnames(unified_df)
 df_colnames = c(
   "Average All Subjects Score" = "FinalAllSbjtAveScore",
   "Average Math Score" = "FinalMathAveScore",
-  "Average Reading/Writing Score" = "FinalEWBRWAveScore"
+  "Average Reading/Writing Score" = "FinalEWBRWAveScore",
+  "Median_Income" = "Median"
 )
 
 viz_1_sidebar <- sidebarPanel(
@@ -48,7 +51,6 @@ viz_1_tab <- tabPanel("Median vs SAT Scores",
 )
 
 ## VIZ 2 TAB INFO
-
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
   #TODO: Put inputs for modifying graph here
@@ -67,7 +69,6 @@ viz_2_tab <- tabPanel("Score Correlation with Income",
 )
 
 ## VIZ 3 TAB INFO
-
 viz_3_sidebar <- sidebarPanel(
   h2("Options for graph"),
   #TODO: Put inputs for modifying graph here
@@ -81,7 +82,7 @@ viz_3_main_panel <- mainPanel(
   plotlyOutput(outputId = "choropleth_graph")
 )
 
-viz_3_tab <- tabPanel("Viz 3 tab title",
+viz_3_tab <- tabPanel("Map of Michigan",
   sidebarLayout(
     viz_3_sidebar,
     viz_3_main_panel
