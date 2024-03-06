@@ -37,7 +37,7 @@ server <- function(input, output){
         fill = "Median"
       )) +
       coord_map() + 
-      labs(title = "Choropleth Map of Median Income Michigan")
+      labs(title = input$graph_title)
     return(ggplotly(my_plot))
   })
   
