@@ -40,7 +40,11 @@ server <- function(input, output){
   
   # TODO Make outputs based on the UI inputs here
   output$Median_vs_SbjtScore <- renderPlotly({
-    Median_vs_SbjtScore <- ggplot(unified_df) +
+    
+    filtered_df <- unified_df %>%
+      filter(Median >= input$lower_limit_median_income_viz1 & Median <= input$upper_limit_median_income_viz1)
+    
+    Median_vs_SbjtScore <- ggplot(filtered_df) +
       geom_point(
         mapping = aes(
           x = Median,
@@ -51,8 +55,9 @@ server <- function(input, output){
   })
   
   output$Scores_vs_Median <- renderPlotly({
+    
     filtered_df <- unified_df %>%
-      filter(Median >= input$low_income & Median <= input$high_income)
+      filter(Median >= input$lower_limit_median_income_viz2 & Median <= input$upper_limit_median_income_viz2)
     
     Scores_vs_Median <- ggplot(filtered_df) + 
       geom_point(mapping = aes(x = FinalMathAveScore, y = FinalEWBRWAveScore, color = Median), size = input$size) + 
@@ -63,8 +68,10 @@ server <- function(input, output){
   })
   
   output$choropleth_graph <- renderPlotly({
+    
     filtered_df <- unified_df %>%
-      filter(Median >= input$lower_limit_for_income & Median <= input$upper_limit_for_income)
+      filter(Median >= input$lower_limit_median_income_viz3 & Median <= input$upper_limit_median_income_viz3)
+
     merged_data <- merge(michigan_shape, filtered_df, by.x = "region", by.y = "State_Name", all.x = TRUE)
     # create ggplot and use
     if (input$show_point_size_as_allsbjctperready) {

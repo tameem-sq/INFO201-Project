@@ -47,7 +47,9 @@ viz_1_sidebar <- sidebarPanel(
     choices = df_colnames,
     selected = "Average All Subjects Score",
   ),
-  sliderInput("point_size", "Point Size:", min = 1, max = 3, value = 1),
+  numericInput("lower_limit_median_income_viz1", "Lower Median Income Threshold:", value = 5000),
+  numericInput("upper_limit_median_income_viz1", "Upper Median Income Threshold:", value = 100000),
+  sliderInput("point_size", "Point Size:", min = 1, max = 3, value = 1)
 )
 
 viz_1_main_panel <- mainPanel(
@@ -66,8 +68,8 @@ viz_1_tab <- tabPanel("Median vs SAT Scores",
 viz_2_sidebar <- sidebarPanel(
   h2("Options for graph"),
   sliderInput("size", "Point Size:", min = 1, max = 3, value = 2),
-  numericInput("low_income", "Lower Median Income Threshold:", value = 5000),
-  numericInput("high_income", "Upper Median Income Threshold:", value = 100000)
+  numericInput("lower_limit_median_income_viz2", "Lower Median Income Threshold:", value = 5000),
+  numericInput("upper_limit_median_income_viz2", "Upper Median Income Threshold:", value = 100000)
 )
 
 viz_2_main_panel <- mainPanel(
@@ -90,8 +92,8 @@ viz_3_sidebar <- sidebarPanel(
   p("Color intensity of point is determined by Median Income."),
   checkboxInput("show_point_size_as_allsbjctperready", "Toggle point size to percentage of students above college proficiency level", TRUE),
   sliderInput("map_point_size", "Point Size:", min = 1, max = 4, value = 3),
-  numericInput("lower_limit_for_income", "Lower Median Income Threshold:", value = 5000),
-  numericInput("upper_limit_for_income", "Upper Median Income Threshold:", value = 100000)
+  numericInput("lower_limit_median_income_viz3", "Lower Median Income Threshold:", value = 5000),
+  numericInput("upper_limit_median_income_viz3", "Upper Median Income Threshold:", value = 100000)
 )
 
 viz_3_main_panel <- mainPanel(
