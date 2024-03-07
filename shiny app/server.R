@@ -21,7 +21,7 @@ combined_income_college <- left_join(income_mich_df, college_df, by=c("Zip_Code"
 
 df_clean <- na.omit(combined_income_college)
 
-columns_to_keep <- c("State_Name", "County", "City", "Zip_Code", "AllSbjtNumReady", "TotalNumberAssessed" = "AllSbjtNumAssessed", "Lat", "Lon", "MeanIncome" = "Mean", "MedianIncome" = "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
+columns_to_keep <- c("State_Name", "Zip_Code", "Lat", "Lon", "MedianIncome" = "Median", "FinalMathAveScore", "FinalAllSbjtAveScore", "FinalEWBRWAveScore", "MathPctReady", "AllSbjtPctReady", "EBRWPctReady")
 
 unified_df <- select(df_clean, all_of(columns_to_keep))
 
@@ -50,7 +50,7 @@ server <- function(input, output){
           x = Median,
           y = !!as.name(input$viz_1_y_axis)), size = input$point_size
       ) +
-      labs(title = input$viz_1_title)
+      labs(title = "Median Income vs SAT Test Scores")
     return(ggplotly(Median_vs_SbjtScore))
   })
   
@@ -94,7 +94,7 @@ server <- function(input, output){
           )
         ) +
         coord_map() + 
-        labs(title = "Map of Michigan")
+        labs(title = "Interactive Map of Zip Codes in Michigan with College Readiness Information and Median Income")
     }
     else {
       my_plot <- ggplot(data = michigan_shape) +
@@ -116,7 +116,7 @@ server <- function(input, output){
           size = input$map_point_size  # Set the default size for points
         ) +
         coord_map() + 
-        labs(title = "Map of Michigan")
+        labs(title = "Interactive Map of Zip Codes in Michigan with College Readiness Information and Median Income")
     }
   
     return(ggplotly(my_plot))

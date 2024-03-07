@@ -53,11 +53,10 @@ viz_1_sidebar <- sidebarPanel(
 )
 
 viz_1_main_panel <- mainPanel(
-  h2("Income Medians vs SAT Test Scores"),
   plotlyOutput(outputId = "Median_vs_SbjtScore")
 )
 
-viz_1_tab <- tabPanel("Median vs SAT Scores",
+viz_1_tab <- tabPanel("Median Income vs SAT Scores",
   sidebarLayout(
     viz_1_sidebar,
     viz_1_main_panel
@@ -73,7 +72,6 @@ viz_2_sidebar <- sidebarPanel(
 )
 
 viz_2_main_panel <- mainPanel(
-  h2("Correlation between Math and Verbal Scores with Median Income"),
   plotlyOutput(outputId = "Scores_vs_Median")
 )
 
@@ -88,7 +86,9 @@ viz_2_tab <- tabPanel("SAT Score Correlation with Income",
 viz_3_sidebar <- sidebarPanel(
   h2("Explanation and Options for Graph"),
   p("Points located at Latitude & Longitude for Zipcodes"), 
-  p("Size of point is determined by Total Percent of Students Ready by default but can be toggled to change size based on input slider"),
+  p("Size of point is determined by the percentage of students who scored above 
+    the college proficiency level in all subjects by default but can be toggled 
+    to change size based on input slider"),
   p("Color intensity of point is determined by Median Income."),
   checkboxInput("show_point_size_as_allsbjctperready", "Toggle point size to percentage of students above college proficiency level", TRUE),
   sliderInput("map_point_size", "Point Size:", min = 1, max = 4, value = 3),
@@ -97,13 +97,11 @@ viz_3_sidebar <- sidebarPanel(
 )
 
 viz_3_main_panel <- mainPanel(
-  h2("Interactive Map of Michigan State"),
-  labs(title = "Show Points: Michigan Zip Codes"),
   #put graph here
   plotlyOutput(outputId = "choropleth_graph")
 )
 
-viz_3_tab <- tabPanel("Map of Michigan",
+viz_3_tab <- tabPanel("Interactive Map of Michigan Zip Codes with College Readiness Information and Median Income",
   sidebarLayout(
     viz_3_sidebar,
     viz_3_main_panel
