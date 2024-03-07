@@ -101,7 +101,7 @@ viz_3_main_panel <- mainPanel(
   plotlyOutput(outputId = "choropleth_graph")
 )
 
-viz_3_tab <- tabPanel("Interactive Map of Michigan Zip Codes with College Readiness Information and Median Income",
+viz_3_tab <- tabPanel("Map of College Readiness and Median Income",
   sidebarLayout(
     viz_3_sidebar,
     viz_3_main_panel

@@ -94,7 +94,7 @@ server <- function(input, output){
           )
         ) +
         coord_map() + 
-        labs(title = "Interactive Map of Zip Codes in Michigan with College Readiness Information and Median Income")
+        labs(title = "Interactive Map of Zip Codes with Median Income and Percentage of Students Above College Proficiency Level")
     }
     else {
       my_plot <- ggplot(data = michigan_shape) +
