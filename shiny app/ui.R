@@ -16,9 +16,11 @@ overview_tab <- tabPanel("Home Page",
    through total SAT scores, our dataset explores if there is a relationship between 
    family incomes and SAT scores among high school students in Michigan. We are seeking 
    to answer if there is a correlation between median family incomes and college readiness 
-   in Michigan, using individual income statistics 
-   (https://www.irs.gov/statistics/soi-tax-stats-individual-income-tax-statistics-2020-zip-code-data-soi) and 
-   a dataset on college readiness in 2017-2018 in Michigan 
+   in Michigan, using U.S. individual income statistics published on Kaggle by Golden Oak Research Group using 
+   2011-2015 ACS 5-Year data provided by the U.S. Census Reports
+   (https://www.kaggle.com/datasets/goldenoakresearch/us-household-income-stats-geo-locations) and 
+   a dataset on college readiness information (including SAT scores) by Zip Code Tabulation Areas (ZCTA) 
+   in 2017-2018 for the state of Michigan published on Data.gov
    (https://catalog.data.gov/dataset/collegereadiness-2017-2018-byzip-20181107-501d2). 
 
 The income data came from Kaggle, yet some median family incomes are at 0, which may be inaccurate or missing data. While we measure college readiness on SAT scores, we do not measure the students that do not take the SAT tests, which may be misleading on measuring college readiness on students in Michigan. 
