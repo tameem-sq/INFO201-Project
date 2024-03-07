@@ -90,8 +90,8 @@ server <- function(input, output){
             x = Lon,
             y = Lat,
             fill = MedianIncome,
-          ),
-          size = input$map_point_size  # Set the default size for points
+            size = AllSbjtPctReady,
+          )
         ) +
         coord_map() + 
         labs(title = "Map of Michigan")
@@ -112,8 +112,8 @@ server <- function(input, output){
             x = Lon,
             y = Lat,
             fill = MedianIncome,
-            size = AllSbjtPctReady,
-          )
+          ),
+          size = input$map_point_size  # Set the default size for points
         ) +
         coord_map() + 
         labs(title = "Map of Michigan")
